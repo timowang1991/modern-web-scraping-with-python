@@ -1,6 +1,10 @@
 import scrapy
 import logging
 
+# command line: scrapy crawl countries -o population_dataset.json --> becomes a json file
+# command line: scrapy crawl countries -o population_dataset.csv  --> becomes a csv file
+# command line: scrapy crawl countries -o population_dataset.xml  --> becomes a xml file
+
 class CountriesSpider(scrapy.Spider):
     name = 'countries' # must be unique across spiders
     allowed_domains = ['www.worldometers.info']  # stops the spider not to visit to facebook or other sites, and don't put https in the front
