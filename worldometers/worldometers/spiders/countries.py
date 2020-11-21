@@ -1,9 +1,13 @@
 import scrapy
 import logging
+from scrapy.shell import inspect_response
 
 # command line: scrapy crawl countries -o population_dataset.json --> becomes a json file
 # command line: scrapy crawl countries -o population_dataset.csv  --> becomes a csv file
 # command line: scrapy crawl countries -o population_dataset.xml  --> becomes a xml file
+
+# the following command line tells scrapy to execute only the parse_country function
+# command line: scrapy parse --spider=countries -c parse_country --meta='{"country_name":"China"}' https://www.worldometers.info/world-population/china-population/
 
 class CountriesSpider(scrapy.Spider):
     name = 'countries' # must be unique across spiders
@@ -24,6 +28,9 @@ class CountriesSpider(scrapy.Spider):
             yield response.follow(url=link, callback=self.parse_country, meta={'country_name': name})
 
     def parse_country(self, response):
+        # this is like a breakpoint, it becomes interactive
+        # inspect_response(response, self) 
+        
         name = response.request.meta['country_name']
         rows = response.xpath('(//table[@class="table table-striped table-bordered table-hover table-condensed table-list"])[1]/tbody/tr')
         for row in rows:
