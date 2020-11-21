@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- //p[@id='unique']/ancestor::node() gets entire webpage except id=unique -->
+                 <!-- ////p[@id='unique']/ancestor-or-self::node() gets entire webpage -->
+<head>
+    <title>XPath and CSS Selectors</title>
+</head>
+
+<body>
+    <h1>XPath Selectors simplified</h1> <!-- //h1/text()  --> <!-- //p[@id='unique']/preceding::h1 -->
+
+    <div class="intro">
+        <p> <!-- //p[@id="outside"]/preceding-sibling::node() --> <!-- //div[@class="intro"]/child::node() -->
+            I'm paragraph within a div with a class set to intro <!-- //div[@class="intro"]/p/text() -->
+            <span id="location">I'm a span with ID set to location and i'm within a paragraph</span>
+        </p>
+        <p id="outside">I'm a paragraph with ID set to outside and i'm within a div with a class set to intro</p> <!-- //div[@class="intro"]/descendant::node() -->
+    </div>
+
+    <div class="outro"> <!-- //p[@id='unique']/parent::node() --> <!-- //div[@class="intro"]/following::node() --> <!-- //div[@class="intro"]/following-sibling::node() -->
+        <p id="unique">I'm in a div with a class attribute set to outro</p>
+    </div>
+
+    <p>Hi i'm placed immediately after a div</p>
+
+    <span class='intro'>Div with a class attribute set to intro</span>
+
+    <ul id="items"> <!-- //ul[@id="items"] -->
+        <li data-identifier="7">Item 1</li> <!-- //ul[@id="items"]/li[position() = 1] -->
+        <li>Item 2</li> <!-- //ul[@id="items"]/li[position() > 1] -->
+        <li>Item 3</li>
+        <li>Item 4</li> <!-- //ul[@id="items"]/li[position() = 1 or position() = 4] --> <!-- //ul[@id="items"]/li[position() = last()] -->
+    </ul>
+
+    <a href="https://www.google.com">Google</a>
+    <a href="http://www.google.fr">Google France</a> <!-- //a[contains(text(), "France")] --> <!-- //a[starts-with(text(), "Google")] -->
+</body>
+
+</html>
