@@ -4,7 +4,13 @@ import scrapy
 class SpecialOffersSpider(scrapy.Spider):
     name = 'special_offers'
     allowed_domains = ['www.cigabuy.com']
-    start_urls = ['https://www.cigabuy.com/consumer-electronics-c-56_75-pg-1.html?disp_order=18/']
+    start_urls = ['https://www.cigabuy.com/consumer-electronics-c-56_75-pg-1.html']
 
     def parse(self, response):
-        pass
+        for product in response.xpath('//div[@class="p_box_wrapper"]/div'):
+            yield {
+                'title': product.xpath('.//a[@class="p_box_title"]/text()').get(),
+                'url': response.urljoin(product.xpath('.//a[@class="p_box_title"]/@href').get()),
+                'discounted_priced': product.xpath('.//div[@class="p_box_price cf"]/span[1]/text()').get(),
+                'original_priced': product.xpath('.//div[@class="p_box_price cf"]/span[2]/text()').get()
+            }
