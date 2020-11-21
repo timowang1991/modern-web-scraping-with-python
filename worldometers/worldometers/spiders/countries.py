@@ -29,7 +29,8 @@ class CountriesSpider(scrapy.Spider):
 
     def parse_country(self, response):
         # this is like a breakpoint, it becomes interactive
-        # inspect_response(response, self) 
+        # inspect_response(response, self)
+        logging.info(response.status)
         
         name = response.request.meta['country_name']
         rows = response.xpath('(//table[@class="table table-striped table-bordered table-hover table-condensed table-list"])[1]/tbody/tr')
