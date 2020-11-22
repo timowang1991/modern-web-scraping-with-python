@@ -13,6 +13,7 @@ class BestMoviesSpider(CrawlSpider):
         # deny=r'Items/' if the link contains 'Items/', do not follow the link
         # Rule(LinkExtractor(restrict_xpath=('//a[@class="active"])), callback='parse_item', follow=True), --> follow all the <a> elements that have the class == "active"
         Rule(LinkExtractor(restrict_xpaths='//h3[@class="lister-item-header"]/a'), callback='parse_item', follow=True),
+        Rule(LinkExtractor(restrict_xpaths='(//a[@class="lister-page-next next-page"])[1]'))
     )
 
     def parse_item(self, response):
